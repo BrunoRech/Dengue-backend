@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      grupo_id: {
+      grupoId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -33,11 +33,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      data_nascimento: {
+      dataNascimento: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      data_ingresso: {
+      dataIngresso: {
         type: Sequelize.DATE,
         allowNull: false,
       },

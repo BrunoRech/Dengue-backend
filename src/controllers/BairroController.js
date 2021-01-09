@@ -2,10 +2,10 @@ const Bairro = require('../models/Bairro');
 
 module.exports = {
   async index(req, res) {
-    const { id: municipio_id } = req.params;
+    const { id: municipioId } = req.params;
     const bairros = await Bairro.findAll({
       where: {
-        municipio_id,
+        municipioId,
       },
       include: {
         association: 'municipio',
@@ -16,8 +16,8 @@ module.exports = {
 
   async store(req, res) {
     const { nome } = req.body;
-    const { id: municipio_id } = req.params;
-    const bairro = await Bairro.create({ nome, municipio_id });
+    const { id: municipioId } = req.params;
+    const bairro = await Bairro.create({ nome, municipioId });
     return res.json(bairro);
   },
 };

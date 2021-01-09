@@ -14,7 +14,7 @@ class Rua extends Model {
 
   static associate({ Bairro }) {
     this.belongsTo(Bairro, {
-      foreignKey: 'bairro_id',
+      foreignKey: 'bairroId',
       as: 'bairro',
     });
   }

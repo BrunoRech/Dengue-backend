@@ -14,7 +14,7 @@ class Grupo extends Model {
 
   static associate({ Agente }) {
     this.hasMany(Agente, {
-      foreignKey: 'grupo_id',
+      foreignKey: 'grupoId',
       as: 'grupo',
     });
   }

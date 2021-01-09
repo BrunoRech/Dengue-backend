@@ -2,10 +2,10 @@ const Rua = require('../models/Rua');
 
 module.exports = {
   async index(req, res) {
-    const { id: bairro_id } = req.params;
+    const { id: bairroId } = req.params;
     const ruas = await Rua.findAll({
       where: {
-        bairro_id,
+        bairroId,
       },
       include: {
         association: 'bairro',
@@ -16,8 +16,8 @@ module.exports = {
 
   async store(req, res) {
     const { nome } = req.body;
-    const { id: bairro_id } = req.params;
-    const rua = await Rua.create({ nome, bairro_id });
+    const { id: bairroId } = req.params;
+    const rua = await Rua.create({ nome, bairroId });
     return res.json(rua);
   },
 };

@@ -18,11 +18,11 @@ class Avaliacao extends Model {
 
   static associate({ Agente, Rua }) {
     this.belongsTo(Rua, {
-      foreignKey: 'rua_id',
+      foreignKey: 'ruaId',
       as: 'rua',
     });
     this.belongsTo(Agente, {
-      foreignKey: 'agente_id',
+      foreignKey: 'agenteId',
       as: 'agente',
     });
   }

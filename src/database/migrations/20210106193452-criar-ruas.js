@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      bairro_id: {
+      bairroId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

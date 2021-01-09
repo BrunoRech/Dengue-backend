@@ -14,11 +14,11 @@ class Bairro extends Model {
 
   static associate({ Municipio, Rua }) {
     this.belongsTo(Municipio, {
-      foreignKey: 'municipio_id',
+      foreignKey: 'municipioId',
       as: 'municipio',
     });
     this.hasMany(Rua, {
-      foreignKey: 'bairro_id',
+      foreignKey: 'bairroId',
       as: 'bairro',
     });
   }

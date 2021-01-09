@@ -8,8 +8,8 @@ class Agente extends Model {
         senha: DataTypes.STRING,
         email: DataTypes.STRING,
         telefone: DataTypes.STRING,
-        data_nascimento: DataTypes.DATE,
-        data_ingresso: DataTypes.DATE,
+        dataNascimento: DataTypes.DATE,
+        dataIngresso: DataTypes.DATE,
       },
       {
         sequelize,
@@ -19,7 +19,7 @@ class Agente extends Model {
 
   static associate({ Grupo }) {
     this.belongsTo(Grupo, {
-      foreignKey: 'grupo_id',
+      foreignKey: 'grupoId',
       as: 'grupo',
     });
   }

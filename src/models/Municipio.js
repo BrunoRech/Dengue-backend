@@ -14,7 +14,7 @@ class Municipio extends Model {
 
   static associate({ Bairro }) {
     this.hasMany(Bairro, {
-      foreignKey: 'municipio_id',
+      foreignKey: 'municipioId',
       as: 'municipio',
     });
   }

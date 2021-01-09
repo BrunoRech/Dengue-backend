@@ -7,23 +7,24 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { id: grupo_id } = req.params;
+    const { id: grupoId } = req.params;
     const {
       nome,
       senha,
       email,
       telefone,
-      data_nascimento,
-      data_ingresso,
+      dataNascimento,
+      dataIngresso,
     } = req.body;
+
     const agente = await Agente.create({
-      grupo_id,
+      grupoId,
       nome,
       senha,
       email,
       telefone,
-      data_nascimento,
-      data_ingresso,
+      dataNascimento,
+      dataIngresso,
     });
     return res.json(agente);
   },

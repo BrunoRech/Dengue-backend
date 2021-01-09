@@ -11,14 +11,14 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { morador, focos, horario, numero, rua_id, agente_id } = req.body;
+    const { morador, focos, horario, numero, ruaId, agenteId } = req.body;
     const avaliacao = await Avaliacao.create({
       morador,
       focos,
       horario,
       numero,
-      rua_id,
-      agente_id,
+      ruaId,
+      agenteId,
     });
     return res.json(avaliacao);
   },
