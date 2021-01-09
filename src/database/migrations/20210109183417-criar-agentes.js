@@ -10,6 +10,16 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
         },
+        grupo_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'grupos',
+            key: 'id'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
         nome: {
           type: Sequelize.STRING,
           allowNull: false
