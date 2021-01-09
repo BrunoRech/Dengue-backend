@@ -13,6 +13,7 @@ class Agente extends Model {
       },
       {
         sequelize,
+        tableName: 'agentes',
       },
     );
   }

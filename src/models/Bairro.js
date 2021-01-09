@@ -8,6 +8,7 @@ class Bairro extends Model {
       },
       {
         sequelize,
+        tableName: 'bairros',
       },
     );
   }

@@ -8,6 +8,7 @@ class Municipio extends Model {
       },
       {
         sequelize,
+        tableName: 'municipios',
       },
     );
   }

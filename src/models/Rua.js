@@ -8,6 +8,7 @@ class Rua extends Model {
       },
       {
         sequelize,
+        tableName: 'ruas',
       },
     );
   }

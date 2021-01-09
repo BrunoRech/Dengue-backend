@@ -1,33 +1,19 @@
 const express = require('express');
-const CoordenadorController = require('./controllers/CoordenadorController');
-const MunicipioController = require('./controllers/MunicipioController');
-const BairroController = require('./controllers/BairroController');
-const RuaController = require('./controllers/RuaController');
-const GrupoController = require('./controllers/GrupoController');
-const AgenteController = require('./controllers/AgenteController');
-const AvaliacaoController = require('./controllers/AvaliacaoController');
 
 const routes = express.Router();
 
-routes.post('/municipios', MunicipioController.store);
-routes.get('/municipios', MunicipioController.index);
+routes.use('/municipios', require('./controllers/Municipio/routes'));
 
-routes.post('/municipios/:id/bairros', BairroController.store);
-routes.get('/municipios/:id/bairros', BairroController.index);
+routes.use('/bairros', require('./controllers/Bairro/routes'));
 
-routes.post('/bairros/:id/ruas', RuaController.store);
-routes.get('/bairros/:id/ruas', RuaController.index);
+routes.use('/ruas', require('./controllers/Rua/routes'));
 
-routes.post('/grupos', GrupoController.store);
-routes.get('/grupos', GrupoController.index);
+routes.use('/grupos', require('./controllers/Grupo/routes'));
 
-routes.post('/grupos/:id/agentes', AgenteController.store);
-routes.get('/grupos/:id/agentes', AgenteController.index);
+routes.use('/agentes', require('./controllers/Agente/routes'));
 
-routes.post('/coordenadores', CoordenadorController.store);
-routes.get('/coordenadores', CoordenadorController.index);
+routes.use('/coordenadores', require('./controllers/Coordenador/routes'));
 
-routes.post('/avaliacoes', AvaliacaoController.store);
-routes.get('/avaliacoes', AvaliacaoController.index);
+routes.use('/avaliacoes', require('./controllers/Avaliacao/routes'));
 
 module.exports = routes;

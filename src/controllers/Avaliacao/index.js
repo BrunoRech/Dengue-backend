@@ -1,4 +1,4 @@
-const Avaliacao = require('../models/Avaliacao');
+const Avaliacao = require('../../models/Avaliacao');
 
 module.exports = {
   async index(req, res) {
@@ -9,6 +9,12 @@ module.exports = {
     });
     return res.json(avaliacoes);
   },
+
+  async show(req, res) { },
+
+  async update(req, res) { },
+
+  async destroy(req, res) { },
 
   async store(req, res) {
     const { morador, focos, horario, numero, ruaId, agenteId } = req.body;

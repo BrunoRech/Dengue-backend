@@ -8,6 +8,7 @@ class Grupo extends Model {
       },
       {
         sequelize,
+        tableName: 'grupos',
       },
     );
   }

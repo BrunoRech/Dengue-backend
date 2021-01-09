@@ -6,6 +6,6 @@ module.exports = {
   database: 'dengue',
   define: {
     timestamps: false,
-    underscored: true,
+    underscored: false,
   },
 };

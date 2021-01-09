@@ -1,4 +1,4 @@
-const Agente = require('../models/Agente');
+const Agente = require('../../models/Agente');
 
 module.exports = {
   async index(req, res) {
@@ -6,9 +6,15 @@ module.exports = {
     return res.json(agentes);
   },
 
+  async show(req, res) { },
+
+  async update(req, res) { },
+
+  async destroy(req, res) { },
+
   async store(req, res) {
-    const { id: grupoId } = req.params;
     const {
+      grupoId,
       nome,
       senha,
       email,
