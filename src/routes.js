@@ -6,6 +6,7 @@ const RuaController = require('./controllers/RuaController');
 const GrupoController = require('./controllers/GrupoController');
 const AgenteController = require('./controllers/AgenteController');
 const AvaliacaoController = require('./controllers/AvaliacaoController');
+
 const routes = express.Router();
 
 routes.post('/municipios', MunicipioController.store);

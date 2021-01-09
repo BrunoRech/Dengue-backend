@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('avaliacoes', {
@@ -7,14 +5,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false
+        allowNull: false,
       },
       rua_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'ruas',
-          key: 'id'
+          key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -24,31 +22,31 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'agentes',
-          key: 'id'
+          key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
       morador: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       focos: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       horario: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       numero: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
     });
   },
 
-  down: async (queryInterface) => {
+  down: async queryInterface => {
     await queryInterface.dropTable('avaliacoes');
-  }
+  },
 };
