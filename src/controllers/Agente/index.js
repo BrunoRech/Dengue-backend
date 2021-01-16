@@ -1,5 +1,4 @@
 const Agente = require('../../models/Agente');
-const Grupo = require('../../models/Grupo');
 
 module.exports = {
   async index(req, res) {
@@ -32,12 +31,6 @@ module.exports = {
       dataNascimento,
       dataIngresso,
     } = req.body;
-    if (grupoId) {
-      const grupo = await Grupo.findByPk(grupoId);
-      if (!grupo) {
-        return res.status(400).json({ mensagem: 'Grupo inexistente' });
-      }
-    }
     const [, agentes] = await Agente.update(
       { grupoId, nome, senha, email, telefone, dataNascimento, dataIngresso },
       {
@@ -73,10 +66,6 @@ module.exports = {
       dataNascimento,
       dataIngresso,
     } = req.body;
-    const grupo = await Grupo.findByPk(grupoId);
-    if (!grupo) {
-      return res.status(400).json({ mensagem: 'Grupo inexistente' });
-    }
     const agente = await Agente.create({
       grupoId,
       nome,

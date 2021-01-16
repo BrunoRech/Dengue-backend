@@ -1,3 +1,5 @@
+const Bairro = require('../models/Bairro');
+
 module.exports = {
   nome: {
     in: ['body'],
@@ -9,6 +11,14 @@ module.exports = {
     in: ['body'],
     exists: {
       errorMessage: 'Bairro Obrigatório',
+    },
+    custom: {
+      options: async value => {
+        const bairro = await Bairro.findByPk(value);
+        if (!bairro) {
+          throw new Error('Bairro Inexistente');
+        }
+      },
     },
   },
 };

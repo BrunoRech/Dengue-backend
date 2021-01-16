@@ -1,4 +1,20 @@
+const Grupo = require('../models/Grupo');
+
 module.exports = {
+  grupoId: {
+    in: ['body'],
+    exists: {
+      errorMessage: 'Grupo Obrigatório',
+    },
+    custom: {
+      options: async value => {
+        const grupo = await Grupo.findByPk(value);
+        if (!grupo) {
+          throw new Error('Grupo Inexistente');
+        }
+      },
+    },
+  },
   nome: {
     in: ['body'],
     exists: {
@@ -24,12 +40,6 @@ module.exports = {
     in: ['body'],
     exists: {
       errorMessage: 'Telefone Obrigatório',
-    },
-  },
-  idGrupo: {
-    in: ['body'],
-    exists: {
-      errorMessage: 'Grupo Obrigatório',
     },
   },
   dataNascimento: {
