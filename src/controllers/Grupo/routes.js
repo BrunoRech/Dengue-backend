@@ -7,8 +7,10 @@ const Handler = require('../../validators/Handler');
 const routes = express.Router();
 
 routes.get('/', GrupoController.index);
-routes.get('/:grupoId', GrupoController.show);
 routes.delete('/:grupoId', GrupoController.destroy);
+routes.get('/:grupoId', checkSchema(GrupoSchema), (req, res) =>
+  Handler(req, res, GrupoController.show),
+);
 routes.post('/', checkSchema(GrupoSchema), (req, res) =>
   Handler(req, res, GrupoController.store),
 );

@@ -7,8 +7,10 @@ const Handler = require('../../validators/Handler');
 const routes = express.Router();
 
 routes.get('/', MunicipioController.index);
-routes.get('/:municipioId', MunicipioController.show);
 routes.delete('/:municipioId', MunicipioController.destroy);
+routes.get('/:municipioId', checkSchema(MunicipioSchema), (req, res) =>
+  Handler(req, res, MunicipioController.show),
+);
 routes.post('/', checkSchema(MunicipioSchema), (req, res) =>
   Handler(req, res, MunicipioController.store),
 );

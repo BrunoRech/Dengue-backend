@@ -7,8 +7,10 @@ const Handler = require('../../validators/Handler');
 const routes = express.Router();
 
 routes.get('/', CoordenadorController.index);
-routes.get('/:coordenadorId', CoordenadorController.show);
 routes.delete('/:coordenadorId', CoordenadorController.destroy);
+routes.get('/:coordenadorId', checkSchema(CoordenadorSchema), (req, res) =>
+  Handler(req, res, CoordenadorController.show),
+);
 routes.post('/', checkSchema(CoordenadorSchema), (req, res) =>
   Handler(req, res, CoordenadorController.store),
 );

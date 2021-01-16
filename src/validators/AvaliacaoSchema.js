@@ -1,7 +1,20 @@
 const Agente = require('../models/Agente');
 const Rua = require('../models/Rua');
+const Avaliacao = require('../models/Avaliacao');
 
 module.exports = {
+  avaliacaoId: {
+    custom: {
+      options: async value => {
+        if (value) {
+          const avaliacao = await Avaliacao.findByPk(value);
+          if (!avaliacao) {
+            throw new Error('Avaliação Inexistente');
+          }
+        }
+      },
+    },
+  },
   agenteId: {
     in: ['body'],
     exists: {

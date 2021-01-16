@@ -7,8 +7,10 @@ const Handler = require('../../validators/Handler');
 const routes = express.Router();
 
 routes.get('/', RuaController.index);
-routes.get('/:ruaId', RuaController.show);
 routes.delete('/:ruaId', RuaController.destroy);
+routes.get('/:ruaId', checkSchema(RuaSchema), (req, res) =>
+  Handler(req, res, RuaController.show),
+);
 routes.post('/', checkSchema(RuaSchema), (req, res) =>
   Handler(req, res, RuaController.store),
 );

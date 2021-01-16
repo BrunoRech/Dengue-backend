@@ -1,6 +1,19 @@
+const Agente = require('../models/Agente');
 const Grupo = require('../models/Grupo');
 
 module.exports = {
+  agenteId: {
+    custom: {
+      options: async value => {
+        if (value) {
+          const agente = await Agente.findByPk(value);
+          if (!agente) {
+            throw new Error('Agente Inexistente');
+          }
+        }
+      },
+    },
+  },
   grupoId: {
     in: ['body'],
     exists: {

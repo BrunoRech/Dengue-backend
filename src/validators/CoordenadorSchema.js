@@ -1,4 +1,18 @@
+const Coordenador = require('../models/Coordenador');
+
 module.exports = {
+  coordenadorId: {
+    custom: {
+      options: async value => {
+        if (value) {
+          const coordenador = await Coordenador.findByPk(value);
+          if (!coordenador) {
+            throw new Error('Coordenador Inexistente');
+          }
+        }
+      },
+    },
+  },
   nome: {
     in: ['body'],
     exists: {

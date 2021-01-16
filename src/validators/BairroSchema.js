@@ -1,6 +1,19 @@
 const Municipio = require('../models/Municipio');
+const Bairro = require('../models/Bairro');
 
 module.exports = {
+  bairroId: {
+    custom: {
+      options: async value => {
+        if (value) {
+          const bairro = await Bairro.findByPk(value);
+          if (!bairro) {
+            throw new Error('Bairro Inexistente');
+          }
+        }
+      },
+    },
+  },
   nome: {
     in: ['body'],
     exists: {
