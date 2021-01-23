@@ -1,4 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 class Agente extends Model {
   static init(sequelize) {
@@ -16,6 +18,12 @@ class Agente extends Model {
         tableName: 'agentes',
       },
     );
+    Agente.prototype.validarSenha = async function (senha) {
+      return bcrypt.compare(senha, this.senha);
+    };
+    Agente.gerarToken = async function () {
+      return jwt.sign({ id: this.id }, process.env.APP_SECRET);
+    };
   }
 
   static associate({ Grupo }) {

@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const Agente = require('../../models/Agente');
 
 module.exports = {
@@ -69,7 +70,7 @@ module.exports = {
     const agente = await Agente.create({
       grupoId,
       nome,
-      senha,
+      senha: await bcrypt.hash(senha, 8),
       email,
       telefone,
       dataNascimento,

@@ -43,7 +43,7 @@ module.exports = {
   email: {
     in: ['body'],
     exists: {
-      errorMessage: 'Email Obrigatório',
+      errorMessage: 'E-mail Obrigatório',
     },
     isEmail: {
       errorMessage: 'Digite um email válido',

@@ -1,4 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 class Coordenador extends Model {
   static init(sequelize) {
@@ -14,6 +16,12 @@ class Coordenador extends Model {
         tableName: 'coordenadores',
       },
     );
+    Coordenador.prototype.validarSenha = async function (senha) {
+      return bcrypt.compare(senha, this.senha);
+    };
+    Coordenador.gerarToken = async function () {
+      return jwt.sign({ id: this.id }, process.env.APP_SECRET);
+    };
   }
 }
 

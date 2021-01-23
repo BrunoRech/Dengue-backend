@@ -1,6 +1,11 @@
 const express = require('express');
+const middlewareAutenticacao = require('./middlewares/autenticacao');
 
 const routes = express.Router();
+
+routes.use('/sessoes', require('./controllers/Municipio/routes'));
+
+routes.use(middlewareAutenticacao);
 
 routes.use('/municipios', require('./controllers/Municipio/routes'));
 
