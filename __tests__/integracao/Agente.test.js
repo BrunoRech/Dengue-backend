@@ -1,22 +1,20 @@
 const request = require('supertest');
-const { coordenador } = require('../factory');
+const { agente } = require('../factory');
 const app = require('../../src');
 
 let token = null;
 
-describe('Testando operações das rotas /coordenadores', () => {
+describe('Testando operações das rotas /agentes', () => {
   beforeAll(async () => {
-    const { body: sessao } = await request(app)
-      .post('/sessoes/coordenadores')
-      .send({
-        senha: '123',
-        email: 'email@email.com',
-      });
+    const { body: sessao } = await request(app).post('/sessoes/agentes').send({
+      senha: '123',
+      email: 'email@email.com',
+    });
     token = sessao.token;
   });
 
   it('Deve-se retornar um erro ao logar com um e-mail inválido', async () => {
-    const response = await request(app).post('/sessoes/coordenadores').send({
+    const response = await request(app).post('/sessoes/agentes').send({
       senha: '567890',
       email: 'email@email.com',
     });
@@ -24,75 +22,91 @@ describe('Testando operações das rotas /coordenadores', () => {
   });
 
   it('Deve-se retornar um erro ao logar com uma senha incorreta', async () => {
-    const response = await request(app).post('/sessoes/coordenadores').send({
+    const response = await request(app).post('/sessoes/agentes').send({
       senha: '123',
       email: 'emailInvalido123@email.com',
     });
     expect(response.status).toBe(400);
   });
 
-  it('Deve-se cadastrar um novo coordenador', async () => {
+  it('Deve-se cadastrar um novo agente', async () => {
     const response = await request(app)
-      .post('/coordenadores')
-      .send(coordenador)
+      .post('/agentes')
+      .send(agente)
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se retornar um erro de campo em branco no cadastro', async () => {
     const response = await request(app)
-      .post('/coordenadores')
-      .send({ ...coordenador, nome: null })
+      .post('/agentes')
+      .send({ ...agente, nome: null })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de grupo inexistente no cadastro', async () => {
+    const response = await request(app)
+      .post('/agentes')
+      .send({ ...agente, nome: 'Nome teste', grupoId: 999 })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de grupo inexistente na alteração', async () => {
+    const response = await request(app)
+      .post('/agentes')
+      .send({ ...agente, nome: 'Nome teste', grupoId: 999 })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
   });
 
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
-      .put('/coordenadores/2')
-      .send({ ...coordenador, nome: null })
+      .put('/agentes/2')
+      .send({ ...agente, nome: null })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
   });
 
-  it('Deve-se retornar um erro de coordenador inexistente na alteração', async () => {
+  it('Deve-se retornar um erro de agente inexistente na alteração', async () => {
     const response = await request(app)
-      .put('/coordenadores/999')
-      .send({ ...coordenador, nome: 'nome2' })
+      .put('/agentes/999')
+      .send({ ...agente, nome: 'nome2' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
   });
 
-  it('Deve-se alterar o nome de um coordenador', async () => {
+  it('Deve-se alterar o nome de um agente', async () => {
     const response = await request(app)
-      .put('/coordenadores/2')
-      .send({ ...coordenador, nome: 'nome novo' })
+      .put('/agentes/2')
+      .send({ ...agente, nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se retornar erro em rotas sem autenticação', async () => {
-    const response = await request(app).get('/coordenadores');
+    const response = await request(app).get('/agentes');
     expect(response.status).toBe(401);
   });
 
-  it('Deve-se retornar a listagem dos coordenadores', async () => {
+  it('Deve-se retornar a listagem dos agentes', async () => {
     const response = await request(app)
-      .get('/coordenadores')
+      .get('/agentes')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 
-  it('Deve-se retornar um coordenador pelo seu id', async () => {
+  it('Deve-se retornar um agente pelo seu id', async () => {
     const response = await request(app)
-      .get('/coordenadores/2')
+      .get('/agentes/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
-  it('Deve-se deletar um coordenador pelo seu id', async () => {
+  it('Deve-se deletar um agente pelo seu id', async () => {
     const response = await request(app)
-      .delete('/coordenadores/2')
+      .delete('/agentes/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
