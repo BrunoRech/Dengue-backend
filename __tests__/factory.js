@@ -22,6 +22,10 @@ module.exports = {
     nome: faker.name.findName(),
     municipioId: 1,
   },
+  rua: {
+    nome: faker.name.findName(),
+    bairroId: 1,
+  },
   coordenador: {
     nome: faker.name.findName(),
     senha: faker.internet.password(),
