@@ -1,4 +1,5 @@
 const Coordenador = require('../models/Coordenador');
+const { optional } = require('./funcoes');
 
 module.exports = {
   coordenadorId: {
@@ -15,19 +16,25 @@ module.exports = {
   },
   nome: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome Obrigatório',
     },
   },
   senha: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Senha Obrigatória',
     },
   },
   email: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'E-mail Obrigatório',
     },
     isEmail: {
@@ -36,7 +43,9 @@ module.exports = {
   },
   telefone: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Telefone Obrigatório',
     },
   },

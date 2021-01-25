@@ -1,4 +1,5 @@
 const Municipio = require('../models/Municipio');
+const { optional } = require('./funcoes');
 
 module.exports = {
   municipioId: {
@@ -15,7 +16,9 @@ module.exports = {
   },
   nome: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome Obrigatório',
     },
   },

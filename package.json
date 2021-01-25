@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "nodemon --ignore __tests__",
     "migrate": "sequelize db:migrate",
-    "reset": "sequelize db:migrate:undo:all",
     "lint": "eslint --fix src",
+    "seed": "sequelize db:seed:all",
+    "reset": "sequelize db:migrate:undo:all & yarn migrate & yarn seed",
     "commit": "git-cz",
-    "pretest": "SET NODE_ENV=test & sequelize db:migrate",
-    "test": "SET NODE_ENV=test & jest --forceExit",
-    "posttest": "SET NODE_ENV=test & sequelize db:migrate:undo:all"
+    "pretest": "SET NODE_ENV=test & yarn reset",
+    "test": "SET NODE_ENV=test & jest --forceExit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -3,13 +3,15 @@ const Agente = require('../models/Agente');
 module.exports = {
   email: {
     in: ['body'],
-    exists: {
+    isEmpty: {
+      negated: true,
       errorMessage: 'E-mail Obrigatório',
     },
   },
   senha: {
     in: ['body'],
-    exists: {
+    isEmpty: {
+      negated: true,
       errorMessage: 'Senha Obrigatória',
     },
     custom: {

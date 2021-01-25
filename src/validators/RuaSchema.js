@@ -1,5 +1,6 @@
 const Bairro = require('../models/Bairro');
 const Rua = require('../models/Rua');
+const { optional } = require('./funcoes');
 
 module.exports = {
   ruaId: {
@@ -16,13 +17,17 @@ module.exports = {
   },
   nome: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome Obrigatório',
     },
   },
   bairroId: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Bairro Obrigatório',
     },
     custom: {

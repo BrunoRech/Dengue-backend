@@ -1,6 +1,7 @@
 const Agente = require('../models/Agente');
 const Rua = require('../models/Rua');
 const Avaliacao = require('../models/Avaliacao');
+const { optional } = require('./funcoes');
 
 module.exports = {
   avaliacaoId: {
@@ -17,7 +18,9 @@ module.exports = {
   },
   agenteId: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Agente Obrigatório',
     },
     custom: {
@@ -31,7 +34,9 @@ module.exports = {
   },
   ruaId: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Rua Obrigatória',
     },
     custom: {
@@ -45,25 +50,33 @@ module.exports = {
   },
   morador: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome do Morador Obrigatório',
     },
   },
   focos: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Número de Focos Obrigatório',
     },
   },
   horario: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Horário Obrigatório',
     },
   },
   numero: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Número da Residência Obrigatório',
     },
   },

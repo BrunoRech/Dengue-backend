@@ -1,4 +1,5 @@
 const Grupo = require('../models/Grupo');
+const { optional } = require('./funcoes');
 
 module.exports = {
   grupoId: {
@@ -15,7 +16,9 @@ module.exports = {
   },
   nome: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome Obrigatório',
     },
   },

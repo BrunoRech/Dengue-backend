@@ -24,6 +24,7 @@ module.exports = {
     'src/**',
     '!src/utils/**.json',
     '!src/database/migrations/**',
+    '!src/database/seeders/**',
   ],
 
   // The directory where Jest should output its coverage files

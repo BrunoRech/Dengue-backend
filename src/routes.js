@@ -5,9 +5,9 @@ const routes = express.Router();
 
 routes.use('/sessoes', require('./controllers/Sessao/routes'));
 
-routes.use('/coordenadores', require('./controllers/Coordenador/routes'));
-
 routes.use(middlewareAutenticacao);
+
+routes.use('/coordenadores', require('./controllers/Coordenador/routes'));
 
 routes.use('/municipios', require('./controllers/Municipio/routes'));
 

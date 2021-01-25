@@ -1,5 +1,6 @@
 const Agente = require('../models/Agente');
 const Grupo = require('../models/Grupo');
+const { optional } = require('./funcoes');
 
 module.exports = {
   agenteId: {
@@ -16,7 +17,9 @@ module.exports = {
   },
   grupoId: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Grupo Obrigatório',
     },
     custom: {
@@ -30,19 +33,25 @@ module.exports = {
   },
   nome: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Nome Obrigatório',
     },
   },
   senha: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Senha Obrigatória',
     },
   },
   email: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'E-mail Obrigatório',
     },
     isEmail: {
@@ -51,19 +60,25 @@ module.exports = {
   },
   telefone: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Telefone Obrigatório',
     },
   },
   dataNascimento: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Data de Nascimento Obrigatória',
     },
   },
   dataIngresso: {
     in: ['body'],
-    exists: {
+    optional,
+    isEmpty: {
+      negated: true,
       errorMessage: 'Data de Ingresso Obrigatória',
     },
   },
