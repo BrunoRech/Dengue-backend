@@ -13,6 +13,8 @@ module.exports = async (req, res, next) => {
     req.userId = codigo.id;
     return next();
   } catch (error) {
-    return res.status(401).json({});
+    return res
+      .status(401)
+      .json([{ msg: 'Sessão expirada, realize o login novamente' }]);
   }
 };

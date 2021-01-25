@@ -19,9 +19,10 @@ class Agente extends Model {
       },
     );
     Agente.prototype.validarSenha = async function (senha) {
-      return bcrypt.compare(senha, this.senha);
+      const res = await bcrypt.compare(senha, this.senha);
+      return res;
     };
-    Agente.gerarToken = async function () {
+    Agente.prototype.gerarToken = async function () {
       return jwt.sign({ id: this.id }, process.env.APP_SECRET);
     };
   }

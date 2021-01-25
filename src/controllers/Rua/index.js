@@ -1,4 +1,4 @@
-const Rua = require('../../models/Rua');
+const { Rua } = require('../../models');
 
 module.exports = {
   async index(req, res) {

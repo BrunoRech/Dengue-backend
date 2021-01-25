@@ -20,8 +20,7 @@ module.exports = {
           if (!agente) {
             throw new Error('E-mail Inexistente');
           }
-          const igual = await agente.validarSenha(senha);
-          if (!igual) {
+          if (!(await agente.validarSenha(senha))) {
             throw new Error('Senha inválida');
           }
         }

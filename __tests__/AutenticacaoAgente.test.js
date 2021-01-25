@@ -1,45 +1,58 @@
 const request = require('supertest');
-const factory = require('./factories');
+const { agente, grupo, coordenador } = require('./factory');
 const app = require('../src');
+
+let token = null;
+const senhaAgente = '123';
+const emailAgente = 'email@email.com';
 
 describe('Autenticação', () => {
   beforeAll(async () => {
-    await factory.create('Grupo');
+    const { body: coordenadorBody } = await request(app)
+      .post('/coordenadores')
+      .send({ ...coordenador, senha: '123' });
+    const { body: sessao } = await request(app)
+      .post('/sessoes/coordenadores')
+      .send({
+        senha: '123',
+        email: coordenadorBody.email,
+      });
+    token = sessao.token;
+    await request(app)
+      .post('/agentes')
+      .send({ ...agente, senha: senhaAgente, email: emailAgente })
+      .set('Authorization', `Bearer ${token}`);
+    await request(app)
+      .post('/grupos')
+      .send(grupo)
+      .set('Authorization', `Bearer ${token}`);
   });
 
   it('login do agente', async () => {
-    const agente = await factory.create('Agente', {
-      senha: '123',
-      email: 'email123@email.com',
-    });
     const response = await request(app).post('/sessoes/agentes').send({
-      senha: agente.senha,
-      email: agente.email,
+      senha: senhaAgente,
+      email: emailAgente,
     });
     expect(response.body).toHaveProperty('token');
   });
 
   it('login do agente inválido', async () => {
-    const agente = await factory.create('Agente', {
-      senha: '123',
-    });
     const response = await request(app).post('/sessoes/agentes').send({
-      email: agente.email,
+      email: emailAgente,
       senha: '123455',
     });
     expect(response.status).toBe(400);
   });
 
   it('sucesso em rotas com autenticação', async () => {
-    const agente = await factory.create('Agente');
     const response = await request(app)
       .get('/grupos')
-      .set('Authorization', `Bearer ${agente.gerarToken()}`);
+      .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 
   it('acesso negado em rotas com autenticação', async () => {
-    const response = await request(app).get('/grupos').set('Authorization');
-    expect(response.status).toBe(200);
+    const response = await request(app).get('/grupos');
+    expect(response.status).toBe(401);
   });
 });

@@ -1,8 +1,7 @@
 const express = require('express');
 const { checkSchema } = require('express-validator');
 const RuaController = require('./index');
-const RuaSchema = require('../../validators/RuaSchema');
-const Handler = require('../../validators/Handler');
+const { Handler, RuaSchema } = require('../../validators');
 
 const routes = express.Router();
 

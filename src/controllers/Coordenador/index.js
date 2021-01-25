@@ -1,4 +1,5 @@
-const Coordenador = require('../../models/Coordenador');
+const bcrypt = require('bcryptjs');
+const { Coordenador } = require('../../models');
 
 module.exports = {
   async index(req, res) {
@@ -41,7 +42,7 @@ module.exports = {
     const { nome, senha, email, telefone } = req.body;
     const coordenador = await Coordenador.create({
       nome,
-      senha,
+      senha: await bcrypt.hash(senha, 8),
       email,
       telefone,
     });

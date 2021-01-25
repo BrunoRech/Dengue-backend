@@ -1,4 +1,4 @@
-const Municipio = require('../../models/Municipio');
+const { Municipio } = require('../../models');
 
 module.exports = {
   async index(req, res) {

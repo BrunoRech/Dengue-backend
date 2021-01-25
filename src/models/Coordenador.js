@@ -19,7 +19,7 @@ class Coordenador extends Model {
     Coordenador.prototype.validarSenha = async function (senha) {
       return bcrypt.compare(senha, this.senha);
     };
-    Coordenador.gerarToken = async function () {
+    Coordenador.prototype.gerarToken = async function () {
       return jwt.sign({ id: this.id }, process.env.APP_SECRET);
     };
   }

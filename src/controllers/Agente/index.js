@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const Agente = require('../../models/Agente');
+const { Agente } = require('../../models');
 
 module.exports = {
   async index(req, res) {

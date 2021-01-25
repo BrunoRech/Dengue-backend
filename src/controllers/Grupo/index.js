@@ -1,4 +1,4 @@
-const Grupo = require('../../models/Grupo');
+const { Grupo } = require('../../models');
 
 module.exports = {
   async index(req, res) {
