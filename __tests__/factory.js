@@ -10,6 +10,14 @@ module.exports = {
     dataNascimento: new Date(),
     dataIngresso: new Date(),
   },
+  avaliacao: {
+    ruaId: 1,
+    agenteId: 1,
+    morador: faker.name.findName(),
+    horario: '15:45',
+    numero: 10,
+    focos: 50,
+  },
   grupo: {
     nome: faker.name.findName(),
   },
