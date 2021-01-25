@@ -15,6 +15,9 @@ module.exports = {
   grupo: {
     nome: faker.name.findName(),
   },
+  municipio: {
+    nome: faker.name.findName(),
+  },
   coordenador: {
     nome: faker.name.findName(),
     senha: faker.internet.password(),
