@@ -71,11 +71,6 @@ describe('Testando operações das rotas /coordenadores', () => {
     expect(response.body).toHaveProperty('nome');
   });
 
-  it('Deve-se retornar erro em rotas sem autenticação', async () => {
-    const response = await request(app).get('/coordenadores');
-    expect(response.status).toBe(401);
-  });
-
   it('Deve-se retornar a listagem dos coordenadores', async () => {
     const response = await request(app)
       .get('/coordenadores')
@@ -95,5 +90,34 @@ describe('Testando operações das rotas /coordenadores', () => {
       .delete('/coordenadores/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar erro em GET /coordenadores sem autenticação', async () => {
+    const response = await request(app).get('/coordenadores');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em GET /coordenadores/:id sem autenticação', async () => {
+    const response = await request(app).get('/coordenadores/1');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em POST /coordenadores sem autenticação', async () => {
+    const response = await request(app)
+      .post('/coordenadores')
+      .send(coordenador);
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em PUT /coordenadores/:id sem autenticação', async () => {
+    const response = await request(app)
+      .put('/coordenadores/1')
+      .send({ ...coordenador, nome: 'nome novo' });
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em DELETE /agentes/:id sem autenticação', async () => {
+    const response = await request(app).delete('/agentes/1');
+    expect(response.status).toBe(401);
   });
 });

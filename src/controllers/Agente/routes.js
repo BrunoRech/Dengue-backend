@@ -1,7 +1,7 @@
 const express = require('express');
 const { checkSchema } = require('express-validator');
-const AgenteController = require('./index');
 const { Handler, AgenteSchema } = require('../../validators');
+const AgenteController = require('./index');
 
 const routes = express.Router();
 

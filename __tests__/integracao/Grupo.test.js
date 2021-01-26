@@ -55,11 +55,6 @@ describe('Testando operações das rotas /grupos', () => {
     expect(response.body).toHaveProperty('nome');
   });
 
-  it('Deve-se retornar erro em rotas sem autenticação', async () => {
-    const response = await request(app).get('/grupos');
-    expect(response.status).toBe(401);
-  });
-
   it('Deve-se retornar a listagem dos grupos', async () => {
     const response = await request(app)
       .get('/grupos')
@@ -79,5 +74,32 @@ describe('Testando operações das rotas /grupos', () => {
       .delete('/grupos/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar erro em GET /grupos sem autenticação', async () => {
+    const response = await request(app).get('/grupos');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em GET /grupos/:id sem autenticação', async () => {
+    const response = await request(app).get('/grupos/1');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em POST /grupos sem autenticação', async () => {
+    const response = await request(app).post('/grupos').send(grupo);
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em PUT /grupos/:id sem autenticação', async () => {
+    const response = await request(app)
+      .put('/grupos/1')
+      .send({ ...grupo, nome: 'nome novo' });
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em DELETE /grupos/:id sem autenticação', async () => {
+    const response = await request(app).delete('/grupos/1');
+    expect(response.status).toBe(401);
   });
 });

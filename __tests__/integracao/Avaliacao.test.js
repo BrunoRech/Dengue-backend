@@ -85,11 +85,6 @@ describe('Testando operações das rotas /avaliacoes', () => {
     expect(response.body).toHaveProperty('agenteId');
   });
 
-  it('Deve-se retornar erro em rotas sem autenticação', async () => {
-    const response = await request(app).get('/avaliacoes');
-    expect(response.status).toBe(401);
-  });
-
   it('Deve-se retornar a listagem das avaliações', async () => {
     const response = await request(app)
       .get('/avaliacoes')
@@ -109,5 +104,32 @@ describe('Testando operações das rotas /avaliacoes', () => {
       .delete('/avaliacoes/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar erro em GET /avaliacoes sem autenticação', async () => {
+    const response = await request(app).get('/avaliacoes');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em GET /avaliacoes/:id sem autenticação', async () => {
+    const response = await request(app).get('/avaliacoes/1');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em POST /avaliacoes sem autenticação', async () => {
+    const response = await request(app).post('/avaliacoes').send(avaliacao);
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em PUT /avaliacoes/:id sem autenticação', async () => {
+    const response = await request(app)
+      .put('/avaliacoes/1')
+      .send({ ...avaliacao, focos: 35 });
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em DELETE /avaliacoes/:id sem autenticação', async () => {
+    const response = await request(app).delete('/avaliacoes/1');
+    expect(response.status).toBe(401);
   });
 });

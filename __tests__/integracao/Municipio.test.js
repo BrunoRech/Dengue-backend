@@ -55,11 +55,6 @@ describe('Testando operações das rotas /municipios', () => {
     expect(response.body).toHaveProperty('nome');
   });
 
-  it('Deve-se retornar erro em rotas sem autenticação', async () => {
-    const response = await request(app).get('/municipios');
-    expect(response.status).toBe(401);
-  });
-
   it('Deve-se retornar a listagem dos municipios', async () => {
     const response = await request(app)
       .get('/municipios')
@@ -79,5 +74,32 @@ describe('Testando operações das rotas /municipios', () => {
       .delete('/municipios/2')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar erro em GET /municipios sem autenticação', async () => {
+    const response = await request(app).get('/municipios');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em GET /municipios/:id sem autenticação', async () => {
+    const response = await request(app).get('/municipios/1');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em POST /municipios sem autenticação', async () => {
+    const response = await request(app).post('/municipios').send(municipio);
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em PUT /municipios/:id sem autenticação', async () => {
+    const response = await request(app)
+      .put('/municipios/1')
+      .send({ ...municipio, nome: 'nome novo' });
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar erro em DELETE /municipios/:id sem autenticação', async () => {
+    const response = await request(app).delete('/municipios/1');
+    expect(response.status).toBe(401);
   });
 });

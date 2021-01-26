@@ -1,13 +1,15 @@
 const Sequelize = require('sequelize');
 const config = require('../config/database');
 
-const Coordenador = require('../models/Coordenador');
-const Municipio = require('../models/Municipio');
-const Avaliacao = require('../models/Avaliacao');
-const Bairro = require('../models/Bairro');
-const Agente = require('../models/Agente');
-const Grupo = require('../models/Grupo');
-const Rua = require('../models/Rua');
+const {
+  Coordenador,
+  Municipio,
+  Avaliacao,
+  Bairro,
+  Agente,
+  Grupo,
+  Rua,
+} = require('../models');
 
 const conn = new Sequelize(config);
 

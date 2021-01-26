@@ -1,7 +1,7 @@
 const express = require('express');
 const { checkSchema } = require('express-validator');
-const AvaliacaoController = require('./index');
 const { Handler, AvaliacaoSchema } = require('../../validators');
+const AvaliacaoController = require('./index');
 
 const routes = express.Router();
 
