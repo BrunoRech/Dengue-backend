@@ -96,7 +96,7 @@ describe('Testando operações das rotas /avaliacoes', () => {
     const response = await request(app)
       .get('/avaliacoes/2')
       .set('Authorization', `Bearer ${token}`);
-    expect(response.body).toHaveProperty('agenteId');
+    expect(response.body).toHaveProperty('id');
   });
 
   it('Deve-se deletar um avaliação pelo seu id', async () => {

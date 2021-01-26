@@ -1,22 +1,21 @@
 const { Bairro } = require('../../models');
 
+const findConfig = {
+  attributes: ['id', 'nome'],
+  include: {
+    association: 'municipio',
+  },
+};
+
 module.exports = {
   async index(req, res) {
-    const bairros = await Bairro.findAll({
-      include: {
-        association: 'municipio',
-      },
-    });
+    const bairros = await Bairro.findAll(findConfig);
     return res.json(bairros);
   },
 
   async show(req, res) {
     const { bairroId } = req.params;
-    const bairro = await Bairro.findByPk(bairroId, {
-      include: {
-        association: 'municipio',
-      },
-    });
+    const bairro = await Bairro.findByPk(bairroId, findConfig);
     return res.json(bairro);
   },
 

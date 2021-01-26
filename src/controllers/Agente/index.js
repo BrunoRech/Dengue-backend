@@ -1,23 +1,29 @@
 const bcrypt = require('bcryptjs');
 const { Agente } = require('../../models');
 
+const findConfig = {
+  attributes: [
+    'id',
+    'nome',
+    'email',
+    'telefone',
+    'dataNascimento',
+    'dataIngresso',
+  ],
+  include: {
+    association: 'grupo',
+  },
+};
+
 module.exports = {
   async index(req, res) {
-    const agentes = await Agente.findAll({
-      include: {
-        association: 'grupo',
-      },
-    });
+    const agentes = await Agente.findAll(findConfig);
     return res.json(agentes);
   },
 
   async show(req, res) {
     const { agenteId } = req.params;
-    const agente = await Agente.findByPk(agenteId, {
-      include: {
-        association: 'grupo',
-      },
-    });
+    const agente = await Agente.findByPk(agenteId, findConfig);
     return res.json(agente);
   },
 

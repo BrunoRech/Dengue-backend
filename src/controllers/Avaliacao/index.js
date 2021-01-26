@@ -1,22 +1,46 @@
 const { Avaliacao } = require('../../models');
 
+const findConfig = {
+  attributes: ['id', 'morador', 'focos', 'numero', 'horario'],
+  include: [
+    {
+      attributes: ['id', 'nome'],
+      association: 'rua',
+      include: {
+        association: 'bairro',
+        attributes: ['id', 'nome'],
+        include: {
+          attributes: ['id', 'nome'],
+          association: 'municipio',
+        },
+      },
+    },
+    {
+      association: 'agente',
+      attributes: [
+        'id',
+        'nome',
+        'email',
+        'telefone',
+        'dataNascimento',
+        'dataIngresso',
+      ],
+      include: {
+        association: 'grupo',
+      },
+    },
+  ],
+};
+
 module.exports = {
   async index(req, res) {
-    const avaliacoes = await Avaliacao.findAll({
-      include: {
-        association: 'rua',
-      },
-    });
+    const avaliacoes = await Avaliacao.findAll(findConfig);
     return res.json(avaliacoes);
   },
 
   async show(req, res) {
     const { avaliacaoId } = req.params;
-    const agente = await Avaliacao.findByPk(avaliacaoId, {
-      include: {
-        association: 'agente',
-      },
-    });
+    const agente = await Avaliacao.findByPk(avaliacaoId, findConfig);
     return res.json(agente);
   },
 

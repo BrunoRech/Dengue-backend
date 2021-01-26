@@ -1,22 +1,26 @@
 const { Rua } = require('../../models');
 
+const findConfig = {
+  attributes: ['id', 'nome'],
+  include: {
+    association: 'bairro',
+    attributes: ['id', 'nome'],
+    include: {
+      attributes: ['id', 'nome'],
+      association: 'municipio',
+    },
+  },
+};
+
 module.exports = {
   async index(req, res) {
-    const ruas = await Rua.findAll({
-      include: {
-        association: 'bairro',
-      },
-    });
+    const ruas = await Rua.findAll(findConfig);
     return res.json(ruas);
   },
 
   async show(req, res) {
     const { ruaId } = req.params;
-    const rua = await Rua.findByPk(ruaId, {
-      include: {
-        association: 'bairro',
-      },
-    });
+    const rua = await Rua.findByPk(ruaId, findConfig);
     return res.json(rua);
   },
 
