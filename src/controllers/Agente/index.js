@@ -33,7 +33,15 @@ module.exports = {
       dataIngresso,
     } = req.body;
     const [, agentes] = await Agente.update(
-      { grupoId, nome, senha, email, telefone, dataNascimento, dataIngresso },
+      {
+        grupoId,
+        nome,
+        senha: senha ? await bcrypt.hash(senha, 8) : undefined,
+        email,
+        telefone,
+        dataNascimento,
+        dataIngresso,
+      },
       {
         returning: true,
         where: {

@@ -17,7 +17,12 @@ module.exports = {
     const { coordenadorId } = req.params;
     const { nome, senha, email, telefone } = req.body;
     const [, coordenadores] = await Coordenador.update(
-      { nome, senha, email, telefone },
+      {
+        nome,
+        senha: senha ? await bcrypt.hash(senha, 8) : undefined,
+        email,
+        telefone,
+      },
       {
         returning: true,
         where: {
