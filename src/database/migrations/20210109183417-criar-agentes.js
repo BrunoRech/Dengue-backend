@@ -21,9 +21,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      cpf: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        unique: true,
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       telefone: {
         type: Sequelize.STRING,

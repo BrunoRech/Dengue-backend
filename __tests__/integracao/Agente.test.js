@@ -77,10 +77,42 @@ describe('Testando operações das rotas /agentes', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de email já existente na alteração', async () => {
+    const response = await request(app)
+      .put('/agentes/2')
+      .send({ email: agente.email })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de email já existente no cadastro', async () => {
+    const response = await request(app)
+      .post('/agentes')
+      .send({ ...agente, cpf: 12345678901 })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de cpf já existente na alteração', async () => {
+    const response = await request(app)
+      .put('/agentes/2')
+      .send({ cpf: agente.cpf })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de cpf já existente no cadastro', async () => {
+    const response = await request(app)
+      .post('/agentes')
+      .send({ ...agente, email: 'email25@email.com' })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se alterar o nome de um agente', async () => {
     const response = await request(app)
       .put('/agentes/2')
-      .send({ ...agente, nome: 'nome novo' })
+      .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });

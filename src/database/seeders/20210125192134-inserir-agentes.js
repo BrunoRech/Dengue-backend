@@ -9,6 +9,7 @@ module.exports = {
         senha: await bcrypt.hash('123', 8),
         email: 'email@email.com',
         telefone: '99999-2222',
+        cpf: 11852346914,
         dataNascimento: new Date(),
         dataIngresso: new Date(),
       },

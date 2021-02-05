@@ -58,7 +58,7 @@ describe('Testando operações das rotas /coordenadores', () => {
   it('Deve-se retornar um erro de coordenador inexistente na alteração', async () => {
     const response = await request(app)
       .put('/coordenadores/999')
-      .send({ ...coordenador, nome: 'nome2' })
+      .send({ nome: 'nome2' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
   });
@@ -66,7 +66,7 @@ describe('Testando operações das rotas /coordenadores', () => {
   it('Deve-se alterar o nome de um coordenador', async () => {
     const response = await request(app)
       .put('/coordenadores/2')
-      .send({ ...coordenador, nome: 'nome novo' })
+      .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
@@ -76,6 +76,38 @@ describe('Testando operações das rotas /coordenadores', () => {
       .get('/coordenadores')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar um erro de email já existente na alteração', async () => {
+    const response = await request(app)
+      .put('/coordenadores/2')
+      .send({ email: coordenador.email })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de email já existente no cadastro', async () => {
+    const response = await request(app)
+      .post('/coordenadores')
+      .send({ ...coordenador, cpf: 12345678901 })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de cpf já existente na alteração', async () => {
+    const response = await request(app)
+      .put('/coordenadores/2')
+      .send({ cpf: coordenador.cpf })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar um erro de cpf já existente no cadastro', async () => {
+    const response = await request(app)
+      .post('/coordenadores')
+      .send({ ...coordenador, email: 'email25@email.com' })
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
   });
 
   it('Deve-se retornar um coordenador pelo seu id', async () => {
@@ -116,8 +148,8 @@ describe('Testando operações das rotas /coordenadores', () => {
     expect(response.status).toBe(401);
   });
 
-  it('Deve-se retornar erro em DELETE /agentes/:id sem autenticação', async () => {
-    const response = await request(app).delete('/agentes/1');
+  it('Deve-se retornar erro em DELETE /coordenadores/:id sem autenticação', async () => {
+    const response = await request(app).delete('/coordenadores/1');
     expect(response.status).toBe(401);
   });
 });

@@ -4,6 +4,7 @@ const { Agente } = require('../../models');
 const findConfig = {
   attributes: [
     'id',
+    'cpf',
     'nome',
     'email',
     'telefone',
@@ -34,6 +35,7 @@ module.exports = {
       nome,
       senha,
       email,
+      cpf,
       telefone,
       dataNascimento,
       dataIngresso,
@@ -44,6 +46,7 @@ module.exports = {
         nome,
         senha: senha ? await bcrypt.hash(senha, 8) : undefined,
         email,
+        cpf,
         telefone,
         dataNascimento,
         dataIngresso,
@@ -75,6 +78,7 @@ module.exports = {
     const {
       grupoId,
       nome,
+      cpf,
       senha,
       email,
       telefone,
@@ -84,6 +88,7 @@ module.exports = {
     const agente = await Agente.create({
       grupoId,
       nome,
+      cpf,
       senha: await bcrypt.hash(senha, 8),
       email,
       telefone,

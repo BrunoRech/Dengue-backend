@@ -7,6 +7,11 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      cpf: {
+        type: Sequelize.BIGINT,
+        allowNull: false,
+        unique: true,
+      },
       nome: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -18,6 +23,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       telefone: {
         type: Sequelize.STRING,

@@ -7,6 +7,7 @@ module.exports = {
     senha: faker.internet.password(),
     email: faker.internet.email(),
     telefone: '82828-1111',
+    cpf: 54430578044,
     dataNascimento: new Date(),
     dataIngresso: new Date(),
   },
@@ -36,6 +37,7 @@ module.exports = {
     nome: faker.name.findName(),
     senha: faker.internet.password(),
     email: faker.internet.email(),
+    cpf: 42156351015,
     telefone: '99999-2222',
   },
 };

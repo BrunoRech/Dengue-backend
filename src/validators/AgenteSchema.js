@@ -47,6 +47,28 @@ module.exports = {
       errorMessage: 'Senha Obrigatória',
     },
   },
+  cpf: {
+    in: ['body'],
+    optional,
+    isEmpty: {
+      negated: true,
+      errorMessage: 'Cpf Obrigatório',
+    },
+    custom: {
+      options: async value => {
+        if (value) {
+          const agente = await Agente.findOne({
+            where: {
+              cpf: value,
+            },
+          });
+          if (agente) {
+            throw new Error('Cpf já existente');
+          }
+        }
+      },
+    },
+  },
   email: {
     in: ['body'],
     optional,
@@ -56,6 +78,20 @@ module.exports = {
     },
     isEmail: {
       errorMessage: 'Digite um email válido',
+    },
+    custom: {
+      options: async value => {
+        if (value) {
+          const coordenador = await Agente.findOne({
+            where: {
+              email: value,
+            },
+          });
+          if (coordenador) {
+            throw new Error('E-mail já existente');
+          }
+        }
+      },
     },
   },
   telefone: {
