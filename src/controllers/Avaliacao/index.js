@@ -1,7 +1,7 @@
 const { Avaliacao } = require('../../models');
 
 const findConfig = {
-  attributes: ['id', 'morador', 'focos', 'numero', 'horario'],
+  attributes: ['id', 'morador', 'focos', 'numero', 'horario', 'dataAvaliacao'],
   include: [
     {
       attributes: ['id', 'nome'],
@@ -46,9 +46,17 @@ module.exports = {
 
   async update(req, res) {
     const { avaliacaoId } = req.params;
-    const { morador, focos, horario, numero, ruaId, agenteId } = req.body;
+    const {
+      morador,
+      focos,
+      horario,
+      numero,
+      ruaId,
+      agenteId,
+      dataAvaliacao,
+    } = req.body;
     const [, avaliacoes] = await Avaliacao.update(
-      { morador, focos, horario, numero, ruaId, agenteId },
+      { morador, focos, horario, numero, ruaId, dataAvaliacao, agenteId },
       {
         returning: true,
         where: {
@@ -73,8 +81,17 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { morador, focos, horario, numero, ruaId, agenteId } = req.body;
+    const {
+      morador,
+      focos,
+      horario,
+      numero,
+      ruaId,
+      agenteId,
+      dataAvaliacao,
+    } = req.body;
     const avaliacao = await Avaliacao.create({
+      dataAvaliacao,
       morador,
       focos,
       horario,

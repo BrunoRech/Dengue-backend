@@ -1,4 +1,5 @@
 const AgenteSchema = require('./AgenteSchema');
+const AgenteVisitaSchema = require('./AgenteVisitaSchema');
 const AvaliacaoSchema = require('./AvaliacaoSchema');
 const BairroSchema = require('./BairroSchema');
 const CoordenadorSchema = require('./CoordenadorSchema');
@@ -13,6 +14,7 @@ module.exports = {
   AgenteSchema,
   AvaliacaoSchema,
   BairroSchema,
+  AgenteVisitaSchema,
   CoordenadorSchema,
   GrupoSchema,
   MunicipioSchema,

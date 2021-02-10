@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      dataAvaliacao: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
       numero: {
         type: Sequelize.INTEGER,
         allowNull: false,

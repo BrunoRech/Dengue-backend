@@ -8,6 +8,7 @@ class Avaliacao extends Model {
         focos: DataTypes.NUMBER,
         horario: DataTypes.STRING,
         numero: DataTypes.NUMBER,
+        dataAvaliacao: DataTypes.DATE,
       },
       {
         sequelize,

@@ -22,6 +22,8 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "func-names": "off"
+    "func-names": "off",
+    "default-case": "off",
+    "no-plusplus":"off"
   }
 }

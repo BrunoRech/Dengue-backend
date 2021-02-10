@@ -7,6 +7,7 @@ module.exports = {
         morador: 'Morador X',
         focos: 50,
         horario: '13:45',
+        dataAvaliacao: new Date(),
         numero: 10,
       },
     ]);

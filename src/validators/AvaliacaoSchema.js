@@ -80,4 +80,12 @@ module.exports = {
       errorMessage: 'Número da Residência Obrigatório',
     },
   },
+  dataAvaliacao: {
+    in: ['body'],
+    optional,
+    isEmpty: {
+      negated: true,
+      errorMessage: 'Data da Avaliação Obrigatória',
+    },
+  },
 };

@@ -1,9 +1,18 @@
 const express = require('express');
 const { checkSchema } = require('express-validator');
-const { Handler, AgenteSchema } = require('../../validators');
 const AgenteController = require('./index');
+const VisitaController = require('../Visita');
+const {
+  Handler,
+  AgenteSchema,
+  AgenteVisitaSchema,
+} = require('../../validators');
 
 const routes = express.Router();
+
+routes.get('/:agenteId/visitas', checkSchema(AgenteVisitaSchema), (req, res) =>
+  Handler(req, res, VisitaController.agentes),
+);
 
 routes.get('/', AgenteController.index);
 routes.delete('/:agenteId', AgenteController.destroy);

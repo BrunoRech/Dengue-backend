@@ -15,6 +15,7 @@ module.exports = {
     ruaId: 1,
     agenteId: 1,
     morador: faker.name.findName(),
+    dataAvaliacao: new Date(),
     horario: '15:45',
     numero: 10,
     focos: 50,
