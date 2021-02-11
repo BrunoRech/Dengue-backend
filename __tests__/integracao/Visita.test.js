@@ -73,4 +73,66 @@ describe('Testando relatórios de visitas', () => {
       .set('periodo', 'Anual');
     expect(response.status).toBe(200);
   });
+
+  it('Deve-se retornar o um erro no número de visitas de um grupo caso o período não for informado', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar o um erro no número de visitas de um grupo caso o grupo não existir', async () => {
+    const response = await request(app)
+      .get('/grupos/99/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar o um erro no número de visitas de um grupo caso não tenha autorização', async () => {
+    const response = await request(app)
+      .get('/grupos/99/visitas')
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar o número de visitas de um grupo no período: Semanal', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de visitas de um grupo no período: Mensal', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Mensal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de visitas de um grupo no período: Trimestral', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Trimestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de visitas de um grupo no período: Semestral', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de visitas de um grupo no período: Anual', async () => {
+    const response = await request(app)
+      .get('/grupos/1/visitas')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Anual');
+    expect(response.status).toBe(200);
+  });
 });

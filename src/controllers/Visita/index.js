@@ -28,7 +28,7 @@ module.exports = {
     const { grupoId } = req.params;
     const { periodo } = req.headers;
     const datas = getPeriodo(periodo);
-    const promises = datas.map(async ({ chave, dataInicial, dataFinal }) => {
+    const promises = datas.map(async ({ dia, mes, dataInicial, dataFinal }) => {
       const count = await Avaliacao.count({
         include: {
           model: Agente,
@@ -43,10 +43,10 @@ module.exports = {
           },
         },
       });
-      return { mes: chave, total: count };
+      return { dia, mes, total: count };
     });
-    await Promise.all(promises).then(v => {
-      return res.json(v);
+    await Promise.all(promises).then(values => {
+      return res.json(values);
     });
   },
 };
