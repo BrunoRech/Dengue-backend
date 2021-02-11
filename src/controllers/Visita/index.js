@@ -4,7 +4,7 @@ const { Agente, Avaliacao } = require('../../models');
 const { getPeriodo } = require('../periodos');
 
 module.exports = {
-  async agentes(req, res) {
+  async agente(req, res) {
     const { agenteId } = req.params;
     const { periodo } = req.headers;
     const datas = getPeriodo(periodo);
@@ -24,7 +24,7 @@ module.exports = {
     });
   },
 
-  async grupos(req, res) {
+  async grupo(req, res) {
     const { grupoId } = req.params;
     const { periodo } = req.headers;
     const datas = getPeriodo(periodo);

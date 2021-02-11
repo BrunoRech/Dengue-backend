@@ -1,6 +1,9 @@
 const AgenteSchema = require('./AgenteSchema');
 const AgenteVisitaSchema = require('./AgenteVisitaSchema');
 const GrupoVisitaSchema = require('./GrupoVisitaSchema');
+const MunicipioFocoSchema = require('./MunicipioFocoSchema');
+const BairroFocoSchema = require('./BairroFocoSchema');
+const RuaFocoSchema = require('./RuaFocoSchema');
 const AvaliacaoSchema = require('./AvaliacaoSchema');
 const BairroSchema = require('./BairroSchema');
 const CoordenadorSchema = require('./CoordenadorSchema');
@@ -23,5 +26,8 @@ module.exports = {
   GrupoVisitaSchema,
   SessaoAgenteSchema,
   SessaoCoordenadorSchema,
+  RuaFocoSchema,
+  BairroFocoSchema,
+  MunicipioFocoSchema,
   Handler,
 };

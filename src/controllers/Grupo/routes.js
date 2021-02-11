@@ -7,7 +7,7 @@ const VisitaController = require('../Visita');
 const routes = express.Router();
 
 routes.get('/:grupoId/visitas', checkSchema(GrupoVisitaSchema), (req, res) =>
-  Handler(req, res, VisitaController.grupos),
+  Handler(req, res, VisitaController.grupo),
 );
 
 routes.get('/', GrupoController.index);

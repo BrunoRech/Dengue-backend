@@ -1,9 +1,14 @@
 const express = require('express');
 const { checkSchema } = require('express-validator');
-const { Handler, RuaSchema } = require('../../validators');
+const { Handler, RuaSchema, RuaFocoSchema } = require('../../validators');
 const RuaController = require('./index');
+const FocoController = require('../Foco');
 
 const routes = express.Router();
+
+routes.get('/:ruaId/focos', checkSchema(RuaFocoSchema), (req, res) =>
+  Handler(req, res, FocoController.rua),
+);
 
 routes.get('/', RuaController.index);
 routes.delete('/:ruaId', RuaController.destroy);
