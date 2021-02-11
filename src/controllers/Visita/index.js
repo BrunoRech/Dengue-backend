@@ -8,17 +8,19 @@ module.exports = {
     const { agenteId } = req.params;
     const { periodo } = req.headers;
     const datas = getPeriodo(periodo);
-    const promises = datas.map(async ({ dia, mes, dataInicial, dataFinal }) => {
-      const count = await Avaliacao.count({
-        where: {
-          agenteId,
-          dataAvaliacao: {
-            [Op.between]: [dataInicial, dataFinal],
+    const promises = datas.map(
+      async ({ dia, mes, ano, dataInicial, dataFinal }) => {
+        const count = await Avaliacao.count({
+          where: {
+            agenteId,
+            dataAvaliacao: {
+              [Op.between]: [dataInicial, dataFinal],
+            },
           },
-        },
-      });
-      return { dia, mes, total: count };
-    });
+        });
+        return { dia, mes, ano, total: count };
+      },
+    );
     await Promise.all(promises).then(values => {
       return res.json(values);
     });
@@ -28,23 +30,25 @@ module.exports = {
     const { grupoId } = req.params;
     const { periodo } = req.headers;
     const datas = getPeriodo(periodo);
-    const promises = datas.map(async ({ dia, mes, dataInicial, dataFinal }) => {
-      const count = await Avaliacao.count({
-        include: {
-          model: Agente,
-          as: 'agente',
+    const promises = datas.map(
+      async ({ dia, mes, ano, dataInicial, dataFinal }) => {
+        const count = await Avaliacao.count({
+          include: {
+            model: Agente,
+            as: 'agente',
+            where: {
+              grupoId,
+            },
+          },
           where: {
-            grupoId,
+            dataAvaliacao: {
+              [Op.between]: [dataInicial, dataFinal],
+            },
           },
-        },
-        where: {
-          dataAvaliacao: {
-            [Op.between]: [dataInicial, dataFinal],
-          },
-        },
-      });
-      return { dia, mes, total: count };
-    });
+        });
+        return { dia, mes, ano, total: count };
+      },
+    );
     await Promise.all(promises).then(values => {
       return res.json(values);
     });
