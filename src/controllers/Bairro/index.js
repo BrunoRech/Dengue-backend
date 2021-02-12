@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { Bairro } = require('../../models');
 
 const findConfig = {
@@ -9,7 +10,15 @@ const findConfig = {
 
 module.exports = {
   async index(req, res) {
-    const bairros = await Bairro.findAll(findConfig);
+    const { nome } = req.query;
+    const bairros = await Bairro.findAll({
+      ...findConfig,
+      where: nome
+        ? {
+            nome: { [Op.iLike]: `%${nome}%` },
+          }
+        : null,
+    });
     return res.json(bairros);
   },
 

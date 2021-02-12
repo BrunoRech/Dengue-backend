@@ -2,13 +2,13 @@
 
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   push:
     branches: [ master ]
 
   workflow_dispatch:
-  
+
 jobs:
 
   build:
@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: copy files to digital ocean
         uses: appleboy/scp-action@master
         env:
@@ -25,9 +25,9 @@ jobs:
           PORT: ${{ secrets.SSH_PORT }}
           KEY: ${{ secrets.SSH_KEY }}
         with:
-          source: ".,!node_modules"
+          source: ".,!node_modules,!__tests__"
           target: "~/apps/Dengue-backend"
-          
+
       - name: Updating server
         uses: appleboy/ssh-action@master
         with:
@@ -41,5 +41,5 @@ jobs:
             yarn sequelize db:migrate
             pm2 restart dengue-api
 
-          
+
 

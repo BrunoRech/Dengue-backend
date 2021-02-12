@@ -1,8 +1,16 @@
+const { Op } = require('sequelize');
 const { Grupo } = require('../../models');
 
 module.exports = {
   async index(req, res) {
-    const grupos = await Grupo.findAll();
+    const { nome } = req.query;
+    const grupos = await Grupo.findAll({
+      where: nome
+        ? {
+            nome: { [Op.iLike]: `%${nome}%` },
+          }
+        : null,
+    });
     return res.json(grupos);
   },
 

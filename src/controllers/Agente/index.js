@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 const { Agente } = require('../../models');
 
 const findConfig = {
@@ -18,7 +19,15 @@ const findConfig = {
 
 module.exports = {
   async index(req, res) {
-    const agentes = await Agente.findAll(findConfig);
+    const { nome } = req.query;
+    const agentes = await Agente.findAll({
+      ...findConfig,
+      where: nome
+        ? {
+            nome: { [Op.iLike]: `%${nome}%` },
+          }
+        : null,
+    });
     return res.json(agentes);
   },
 
