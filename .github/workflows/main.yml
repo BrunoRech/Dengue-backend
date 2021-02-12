@@ -28,4 +28,31 @@ jobs:
           source: ".,!node_modules"
           target: "~/apps/Dengue-backend"
           
+      - name: Installing dependencies
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USER }}
+          PORT: ${{ secrets.SSH_PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: cd ~/apps/Dengue-backend && yarn
+          
+      - name: Installing dependencies
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USER }}
+          PORT: ${{ secrets.SSH_PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: cd ~/apps/Dengue-backend && yarn sequelize db:migrate  
+          
+      - name: Restart Server
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USER }}
+          PORT: ${{ secrets.SSH_PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: pm2 restart dengue-api
+          
 
