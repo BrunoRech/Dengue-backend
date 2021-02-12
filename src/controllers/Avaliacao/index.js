@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+const moment = require('moment');
 const { Avaliacao } = require('../../models');
 
 const findConfig = {
@@ -34,7 +36,21 @@ const findConfig = {
 
 module.exports = {
   async index(req, res) {
-    const avaliacoes = await Avaliacao.findAll(findConfig);
+    const { dataAvaliacao } = req.query;
+    const [dataInicial, dataFinal] = [
+      moment(dataAvaliacao, 'DD-MM-YYYY').startOf('day').toString(),
+      moment(dataAvaliacao, 'DD-MM-YYYY').endOf('day').toString(),
+    ];
+    const avaliacoes = await Avaliacao.findAll({
+      ...findConfig,
+      where: dataAvaliacao
+        ? {
+            dataAvaliacao: {
+              [Op.between]: [dataInicial, dataFinal],
+            },
+          }
+        : null,
+    });
     return res.json(avaliacoes);
   },
 
