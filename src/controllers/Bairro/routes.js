@@ -9,6 +9,9 @@ const routes = express.Router();
 routes.get('/:bairroId/focos', checkSchema(BairroFocoSchema), (req, res) =>
   Handler(req, res, FocoController.bairro),
 );
+routes.get('/focos', checkSchema(BairroFocoSchema), (req, res) =>
+  Handler(req, res, FocoController.bairros),
+);
 
 routes.get('/', BairroController.index);
 routes.delete('/:bairroId', BairroController.destroy);

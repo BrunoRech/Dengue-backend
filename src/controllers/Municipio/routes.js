@@ -15,6 +15,9 @@ routes.get(
   checkSchema(MunicipioFocoSchema),
   (req, res) => Handler(req, res, FocoController.municipio),
 );
+routes.get('/focos', checkSchema(MunicipioFocoSchema), (req, res) =>
+  Handler(req, res, FocoController.municipios),
+);
 
 routes.get('/', MunicipioController.index);
 routes.delete('/:municipioId', MunicipioController.destroy);

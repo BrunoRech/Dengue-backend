@@ -9,6 +9,9 @@ const routes = express.Router();
 routes.get('/:ruaId/focos', checkSchema(RuaFocoSchema), (req, res) =>
   Handler(req, res, FocoController.rua),
 );
+routes.get('/focos', checkSchema(RuaFocoSchema), (req, res) =>
+  Handler(req, res, FocoController.ruas),
+);
 
 routes.get('/', RuaController.index);
 routes.delete('/:ruaId', RuaController.destroy);

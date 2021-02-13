@@ -15,6 +15,40 @@ const getChave = (unidade, subtrair) => {
   }
 };
 
+const getPeriodoCompleto = periodo => {
+  switch (periodo) {
+    case 'Hoje':
+      return [moment().startOf('day'), moment().endOf('day')];
+    case 'Semanal':
+      return [
+        moment().subtract(1, 'week').startOf('day'),
+        moment().endOf('day'),
+      ];
+    case 'Mensal':
+      return [
+        moment().subtract(1, 'month').startOf('day'),
+        moment().endOf('day'),
+      ];
+    case 'Trimestral':
+      return [
+        moment().subtract(3, 'month').startOf('day'),
+        moment().endOf('day'),
+      ];
+    case 'Semestral':
+      return [
+        moment().subtract(6, 'month').startOf('day'),
+        moment().endOf('day'),
+      ];
+    case 'Anual':
+      return [
+        moment().subtract(1, 'year').startOf('day'),
+        moment().endOf('day'),
+      ];
+    default:
+      return null;
+  }
+};
+
 const getInicioFimMes = subtrair =>
   !subtrair
     ? {
@@ -86,4 +120,5 @@ const getPeriodo = periodo => {
 
 module.exports = {
   getPeriodo,
+  getPeriodoCompleto,
 };
