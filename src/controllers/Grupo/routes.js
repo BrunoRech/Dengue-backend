@@ -9,6 +9,9 @@ const routes = express.Router();
 routes.get('/:grupoId/visitas', checkSchema(GrupoVisitaSchema), (req, res) =>
   Handler(req, res, VisitaController.grupo),
 );
+routes.get('/visitas', checkSchema(GrupoVisitaSchema), (req, res) =>
+  Handler(req, res, VisitaController.grupos),
+);
 
 routes.get('/', GrupoController.index);
 routes.delete('/:grupoId', GrupoController.destroy);

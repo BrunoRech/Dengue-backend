@@ -13,6 +13,9 @@ const routes = express.Router();
 routes.get('/:agenteId/visitas', checkSchema(AgenteVisitaSchema), (req, res) =>
   Handler(req, res, VisitaController.agente),
 );
+routes.get('/visitas', checkSchema(AgenteVisitaSchema), (req, res) =>
+  Handler(req, res, VisitaController.agentes),
+);
 
 routes.get('/', AgenteController.index);
 routes.delete('/:agenteId', AgenteController.destroy);
