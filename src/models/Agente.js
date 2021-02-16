@@ -9,7 +9,7 @@ class Agente extends Model {
         nome: DataTypes.STRING,
         senha: DataTypes.STRING,
         email: DataTypes.STRING,
-        cpf: DataTypes.BIGINT,
+        cpf: DataTypes.STRING,
         telefone: DataTypes.STRING,
         dataNascimento: DataTypes.DATE,
         dataIngresso: DataTypes.DATE,

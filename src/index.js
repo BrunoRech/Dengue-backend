@@ -9,6 +9,8 @@ const app = express();
 
 app.use(express.json());
 app.use(routes);
-app.listen(5555);
+
+// eslint-disable-next-line no-console
+app.listen(5555, () => console.log('Servidor rodando na porta 5555'));
 
 module.exports = app;

@@ -7,7 +7,7 @@ module.exports = {
     senha: faker.internet.password(),
     email: faker.internet.email(),
     telefone: '82828-1111',
-    cpf: 54430578044,
+    cpf: '980.414.450-63',
     dataNascimento: new Date(),
     dataIngresso: new Date(),
   },

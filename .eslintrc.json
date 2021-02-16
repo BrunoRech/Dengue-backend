@@ -24,6 +24,7 @@
     "prettier/prettier": "error",
     "func-names": "off",
     "default-case": "off",
-    "no-plusplus":"off"
+    "no-plusplus":"off",
+    "radix":"off"
   }
 }
