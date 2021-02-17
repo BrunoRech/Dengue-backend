@@ -33,6 +33,27 @@ describe('Testando relatórios de focos', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar o um erro no número de focos dos municípios caso o período não for informado', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar o um erro no número de focos dos bairros caso o período não for informado', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
+  it('Deve-se retornar o um erro no número de focos das ruas caso o período não for informado', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se retornar o um erro no número de focos de um agente caso a rua não existir', async () => {
     const response = await request(app)
       .get('/ruas/99/focos')
@@ -74,6 +95,27 @@ describe('Testando relatórios de focos', () => {
   it('Deve-se retornar o um erro no número de focos de um município caso não tenha autorização', async () => {
     const response = await request(app)
       .get('/municipios/1/focos')
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar o um erro no número de focos dos municípios caso não tenha autorização', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar o um erro no número de focos dos bairros caso não tenha autorização', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(401);
+  });
+
+  it('Deve-se retornar o um erro no número de focos das ruas caso não tenha autorização', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
       .set('periodo', 'Semanal');
     expect(response.status).toBe(401);
   });
@@ -193,6 +235,134 @@ describe('Testando relatórios de focos', () => {
   it('Deve-se retornar o número de focos de um município no período: Anual', async () => {
     const response = await request(app)
       .get('/municipios/1/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Anual');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Semanal', async () => {
+    const response = await request(app)
+      .get('/municipios/1/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semanal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Hoje', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Hoje');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Mensal', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Mensal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Trimestral', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Trimestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Semestral', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos municípios no período: Anual', async () => {
+    const response = await request(app)
+      .get('/municipios/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Anual');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos bairros no período: Hoje', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Hoje');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos bairros no período: Mensal', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Mensal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos bairros no período: Trimestral', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Trimestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos bairros no período: Semestral', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos dos bairros no período: Anual', async () => {
+    const response = await request(app)
+      .get('/bairros/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Anual');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos das ruas no período: Hoje', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Hoje');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos das ruas no período: Mensal', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Mensal');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos das ruas no período: Trimestral', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Trimestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos das ruas no período: Semestral', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
+      .set('Authorization', `Bearer ${token}`)
+      .set('periodo', 'Semestral');
+    expect(response.status).toBe(200);
+  });
+
+  it('Deve-se retornar o número de focos das ruas no período: Anual', async () => {
+    const response = await request(app)
+      .get('/ruas/focos')
       .set('Authorization', `Bearer ${token}`)
       .set('periodo', 'Anual');
     expect(response.status).toBe(200);
