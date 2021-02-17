@@ -71,6 +71,23 @@ module.exports = {
       negated: true,
       errorMessage: 'Horário Obrigatório',
     },
+    custom: {
+      options: async value => {
+        if (value.length !== 5) {
+          throw new Error('Horário Inválido');
+        }
+        const [horas, minutos] = value.split(':');
+        if (
+          Number(horas) > 24 ||
+          Number(horas) < 0 ||
+          Number(minutos) > 59 ||
+          Number(minutos) < 0
+        ) {
+          throw new Error('Horário Inválido');
+        }
+        return true;
+      },
+    },
   },
   numero: {
     in: ['body'],
