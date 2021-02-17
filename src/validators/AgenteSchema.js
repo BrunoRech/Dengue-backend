@@ -1,6 +1,6 @@
 const Agente = require('../models/Agente');
 const Grupo = require('../models/Grupo');
-const { optional } = require('./funcoes');
+const { optional, validacaoData } = require('./funcoes');
 
 module.exports = {
   agenteId: {
@@ -105,6 +105,7 @@ module.exports = {
   dataNascimento: {
     in: ['body'],
     optional,
+    custom: validacaoData,
     isEmpty: {
       negated: true,
       errorMessage: 'Data de Nascimento Obrigatória',
@@ -113,6 +114,7 @@ module.exports = {
   dataIngresso: {
     in: ['body'],
     optional,
+    custom: validacaoData,
     isEmpty: {
       negated: true,
       errorMessage: 'Data de Ingresso Obrigatória',

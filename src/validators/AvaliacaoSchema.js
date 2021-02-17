@@ -1,7 +1,7 @@
 const Agente = require('../models/Agente');
 const Rua = require('../models/Rua');
 const Avaliacao = require('../models/Avaliacao');
-const { optional } = require('./funcoes');
+const { optional, validacaoData } = require('./funcoes');
 
 module.exports = {
   avaliacaoId: {
@@ -83,6 +83,7 @@ module.exports = {
   dataAvaliacao: {
     in: ['body'],
     optional,
+    validacaoData,
     isEmpty: {
       negated: true,
       errorMessage: 'Data da Avaliação Obrigatória',

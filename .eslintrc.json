@@ -25,6 +25,7 @@
     "func-names": "off",
     "default-case": "off",
     "no-plusplus":"off",
+    "no-new": "off",
     "radix":"off"
   }
 }

@@ -38,7 +38,7 @@ jobs:
           script: |
             cd ~/apps/Dengue-backend
             yarn
-            yarn reset
+            yarn migrate
             pm2 restart dengue-api
 
 
