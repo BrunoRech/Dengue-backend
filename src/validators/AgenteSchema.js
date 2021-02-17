@@ -1,12 +1,18 @@
-const Agente = require('../models/Agente');
-const Grupo = require('../models/Grupo');
+const { Grupo, Agente, Avaliacao } = require('../models');
 const { optional, validacaoData } = require('./funcoes');
 
 module.exports = {
   agenteId: {
     custom: {
-      options: async value => {
-        if (value) {
+      options: async (value, { req }) => {
+        if (req.method === 'DELETE') {
+          const avaliacao = await Avaliacao.findOne({
+            where: { agenteId: value },
+          });
+          if (avaliacao) {
+            throw new Error('Este Agente Possui Avaliações Cadastradas!');
+          }
+        } else if (value) {
           const agente = await Agente.findByPk(value);
           if (!agente) {
             throw new Error('Agente Inexistente');

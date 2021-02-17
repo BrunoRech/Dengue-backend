@@ -39,6 +39,13 @@ describe('Testando operações das rotas /ruas', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de rua com avaliações cadastradas', async () => {
+    const response = await request(app)
+      .delete('/ruas/1')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
       .put('/ruas/2')

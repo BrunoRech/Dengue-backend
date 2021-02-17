@@ -1,12 +1,18 @@
-const Municipio = require('../models/Municipio');
-const Bairro = require('../models/Bairro');
 const { optional } = require('./funcoes');
+const { Rua, Bairro, Municipio } = require('../models');
 
 module.exports = {
   bairroId: {
     custom: {
-      options: async value => {
-        if (value) {
+      options: async (value, { req }) => {
+        if (req.method === 'DELETE') {
+          const rua = await Rua.findOne({
+            where: { bairroId: value },
+          });
+          if (rua) {
+            throw new Error('Este Bairro Possui Ruas Cadastradas!');
+          }
+        } else if (value) {
           const bairro = await Bairro.findByPk(value);
           if (!bairro) {
             throw new Error('Bairro Inexistente');

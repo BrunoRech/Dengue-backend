@@ -14,7 +14,10 @@ routes.get('/visitas', checkSchema(GrupoVisitaSchema), (req, res) =>
 );
 
 routes.get('/', GrupoController.index);
-routes.delete('/:grupoId', GrupoController.destroy);
+
+routes.delete('/:grupoId', checkSchema(GrupoSchema), (req, res) =>
+  Handler(req, res, GrupoController.destroy),
+);
 routes.get('/:grupoId', checkSchema(GrupoSchema), (req, res) =>
   Handler(req, res, GrupoController.show),
 );

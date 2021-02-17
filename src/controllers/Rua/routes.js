@@ -14,7 +14,10 @@ routes.get('/focos', checkSchema(RuaFocoSchema), (req, res) =>
 );
 
 routes.get('/', RuaController.index);
-routes.delete('/:ruaId', RuaController.destroy);
+
+routes.delete('/:ruaId', checkSchema(RuaSchema), (req, res) =>
+  Handler(req, res, RuaController.destroy),
+);
 routes.get('/:ruaId', checkSchema(RuaSchema), (req, res) =>
   Handler(req, res, RuaController.show),
 );

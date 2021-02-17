@@ -18,7 +18,9 @@ routes.get('/visitas', checkSchema(AgenteVisitaSchema), (req, res) =>
 );
 
 routes.get('/', AgenteController.index);
-routes.delete('/:agenteId', AgenteController.destroy);
+routes.delete('/:agenteId', checkSchema(AgenteSchema), (req, res) =>
+  Handler(req, res, AgenteController.destroy),
+);
 routes.get('/:agenteId', checkSchema(AgenteSchema), (req, res) =>
   Handler(req, res, AgenteController.show),
 );

@@ -47,6 +47,13 @@ describe('Testando operações das rotas /municipios', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de município com bairros cadastrados', async () => {
+    const response = await request(app)
+      .delete('/municipios/1')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se alterar o nome de um municipio', async () => {
     const response = await request(app)
       .put('/municipios/2')

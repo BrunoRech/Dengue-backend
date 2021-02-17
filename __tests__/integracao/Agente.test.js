@@ -45,6 +45,13 @@ describe('Testando operações das rotas /agentes', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de agente com avaliações cadastradas', async () => {
+    const response = await request(app)
+      .delete('/agentes/1')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se retornar um erro de grupo inexistente no cadastro', async () => {
     const response = await request(app)
       .post('/agentes')

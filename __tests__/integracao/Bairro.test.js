@@ -31,6 +31,13 @@ describe('Testando operações das rotas /bairros', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de bairro com ruas cadastradas', async () => {
+    const response = await request(app)
+      .delete('/bairros/1')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se retornar um erro de município inexistente no cadastro', async () => {
     const response = await request(app)
       .post('/bairros')

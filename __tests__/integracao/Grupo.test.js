@@ -31,6 +31,13 @@ describe('Testando operações das rotas /grupos', () => {
     expect(response.status).toBe(400);
   });
 
+  it('Deve-se retornar um erro de grupo com agentes cadastrados', async () => {
+    const response = await request(app)
+      .delete('/grupos/1')
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(400);
+  });
+
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
       .put('/grupos/2')

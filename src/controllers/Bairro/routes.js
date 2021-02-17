@@ -14,7 +14,10 @@ routes.get('/focos', checkSchema(BairroFocoSchema), (req, res) =>
 );
 
 routes.get('/', BairroController.index);
-routes.delete('/:bairroId', BairroController.destroy);
+
+routes.delete('/:bairroId', checkSchema(BairroSchema), (req, res) =>
+  Handler(req, res, BairroController.destroy),
+);
 routes.get('/:bairroId', checkSchema(BairroSchema), (req, res) =>
   Handler(req, res, BairroController.show),
 );

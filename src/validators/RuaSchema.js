@@ -1,12 +1,18 @@
-const Bairro = require('../models/Bairro');
-const Rua = require('../models/Rua');
+const { Avaliacao, Bairro, Rua } = require('../models');
 const { optional } = require('./funcoes');
 
 module.exports = {
   ruaId: {
     custom: {
-      options: async value => {
-        if (value) {
+      options: async (value, { req }) => {
+        if (req.method === 'DELETE') {
+          const avaliacao = await Avaliacao.findOne({
+            where: { ruaId: value },
+          });
+          if (avaliacao) {
+            throw new Error('Esta Rua Possui Avaliações Cadastradas!');
+          }
+        } else if (value) {
           const rua = await Rua.findByPk(value);
           if (!rua) {
             throw new Error('Rua Inexistente');
