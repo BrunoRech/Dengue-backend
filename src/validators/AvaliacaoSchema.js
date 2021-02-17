@@ -83,7 +83,7 @@ module.exports = {
   dataAvaliacao: {
     in: ['body'],
     optional,
-    validacaoData,
+    custom: validacaoData,
     isEmpty: {
       negated: true,
       errorMessage: 'Data da Avaliação Obrigatória',
