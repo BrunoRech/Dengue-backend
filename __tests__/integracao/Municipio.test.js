@@ -33,7 +33,7 @@ describe('Testando operações das rotas /municipios', () => {
 
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
-      .put('/municipios/2')
+      .put('/municipios/3')
       .send({ nome: null })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -56,7 +56,7 @@ describe('Testando operações das rotas /municipios', () => {
 
   it('Deve-se alterar o nome de um municipio', async () => {
     const response = await request(app)
-      .put('/municipios/2')
+      .put('/municipios/3')
       .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
@@ -71,14 +71,14 @@ describe('Testando operações das rotas /municipios', () => {
 
   it('Deve-se retornar um municipio pelo seu id', async () => {
     const response = await request(app)
-      .get('/municipios/2')
+      .get('/municipios/3')
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se deletar um municipio pelo seu id', async () => {
     const response = await request(app)
-      .delete('/municipios/2')
+      .delete('/municipios/3')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });

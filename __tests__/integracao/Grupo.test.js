@@ -40,7 +40,7 @@ describe('Testando operações das rotas /grupos', () => {
 
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
-      .put('/grupos/2')
+      .put('/grupos/4')
       .send({ nome: null })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -56,7 +56,7 @@ describe('Testando operações das rotas /grupos', () => {
 
   it('Deve-se alterar o nome de um grupo', async () => {
     const response = await request(app)
-      .put('/grupos/2')
+      .put('/grupos/4')
       .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
@@ -71,14 +71,14 @@ describe('Testando operações das rotas /grupos', () => {
 
   it('Deve-se retornar um grupo pelo seu id', async () => {
     const response = await request(app)
-      .get('/grupos/2')
+      .get('/grupos/4')
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se deletar um grupo pelo seu id', async () => {
     const response = await request(app)
-      .delete('/grupos/2')
+      .delete('/grupos/4')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });

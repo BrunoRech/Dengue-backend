@@ -48,7 +48,7 @@ describe('Testando operações das rotas /bairros', () => {
 
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
-      .put('/bairros/2')
+      .put('/bairros/7')
       .send({ nome: null })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -72,7 +72,7 @@ describe('Testando operações das rotas /bairros', () => {
 
   it('Deve-se alterar o nome de um bairro', async () => {
     const response = await request(app)
-      .put('/bairros/2')
+      .put('/bairros/7')
       .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
@@ -87,14 +87,14 @@ describe('Testando operações das rotas /bairros', () => {
 
   it('Deve-se retornar um bairro pelo seu id', async () => {
     const response = await request(app)
-      .get('/bairros/2')
+      .get('/bairros/7')
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se deletar um bairro pelo seu id', async () => {
     const response = await request(app)
-      .delete('/bairros/2')
+      .delete('/bairros/7')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });

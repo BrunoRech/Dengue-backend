@@ -4,6 +4,12 @@ module.exports = {
       {
         nome: 'Grupo 1',
       },
+      {
+        nome: 'Grupo 2',
+      },
+      {
+        nome: 'Grupo 3',
+      },
     ]);
   },
   down: queryInterface => {

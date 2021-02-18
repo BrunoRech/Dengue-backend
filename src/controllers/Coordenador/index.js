@@ -1,15 +1,19 @@
 const bcrypt = require('bcryptjs');
 const { Coordenador } = require('../../models');
 
+const findConfig = {
+  attributes: ['id', 'cpf', 'nome', 'email', 'telefone'],
+};
+
 module.exports = {
   async index(req, res) {
-    const coordenadores = await Coordenador.findAll();
+    const coordenadores = await Coordenador.findAll(findConfig);
     return res.json(coordenadores);
   },
 
   async show(req, res) {
     const { coordenadorId } = req.params;
-    const coordenador = await Coordenador.findByPk(coordenadorId);
+    const coordenador = await Coordenador.findByPk(coordenadorId, findConfig);
     return res.json(coordenador);
   },
 

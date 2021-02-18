@@ -8,7 +8,7 @@ class Coordenador extends Model {
       {
         nome: DataTypes.STRING,
         senha: DataTypes.STRING,
-        cpf: DataTypes.BIGINT,
+        cpf: DataTypes.STRING,
         email: DataTypes.STRING,
         telefone: DataTypes.STRING,
       },

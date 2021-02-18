@@ -70,7 +70,7 @@ describe('Testando operações das rotas /agentes', () => {
 
   it('Deve-se retornar um erro de campo em branco na alteração', async () => {
     const response = await request(app)
-      .put('/agentes/2')
+      .put('/agentes/5')
       .send({ ...agente, nome: null })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -86,7 +86,7 @@ describe('Testando operações das rotas /agentes', () => {
 
   it('Deve-se retornar um erro de email já existente na alteração', async () => {
     const response = await request(app)
-      .put('/agentes/2')
+      .put('/agentes/5')
       .send({ email: agente.email })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -102,7 +102,7 @@ describe('Testando operações das rotas /agentes', () => {
 
   it('Deve-se retornar um erro de cpf já existente na alteração', async () => {
     const response = await request(app)
-      .put('/agentes/2')
+      .put('/agentes/5')
       .send({ cpf: agente.cpf })
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(400);
@@ -118,7 +118,7 @@ describe('Testando operações das rotas /agentes', () => {
 
   it('Deve-se alterar o nome de um agente', async () => {
     const response = await request(app)
-      .put('/agentes/2')
+      .put('/agentes/5')
       .send({ nome: 'nome novo' })
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
@@ -133,14 +133,14 @@ describe('Testando operações das rotas /agentes', () => {
 
   it('Deve-se retornar um agente pelo seu id', async () => {
     const response = await request(app)
-      .get('/agentes/2')
+      .get('/agentes/5')
       .set('Authorization', `Bearer ${token}`);
     expect(response.body).toHaveProperty('nome');
   });
 
   it('Deve-se deletar um agente pelo seu id', async () => {
     const response = await request(app)
-      .delete('/agentes/2')
+      .delete('/agentes/5')
       .set('Authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });

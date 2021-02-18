@@ -2,7 +2,10 @@ module.exports = {
   up: async queryInterface => {
     return queryInterface.bulkInsert('municipios', [
       {
-        nome: 'Município 1',
+        nome: 'São Miguel do Oeste',
+      },
+      {
+        nome: 'Ibirama',
       },
     ]);
   },
